@@ -1,9 +1,10 @@
 import './App.css';
+import PopUp from './pages/PopUp';
 
 function App() {
   return (
     <div className="App w-full">
-      <button className='text-white font-bold bg-yellow-500 px-10 py-2 rounded-lg mt-10 mb-10'>Click</button>
+<PopUp />
     </div>
   );
 }
