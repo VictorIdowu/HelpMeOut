@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "CakeCapture",
-  "description": "Screen video and audio recorder",
+  "name": "HelpMeOut",
+  "description": "This extension helps you record and share help videos with ease.",
   "version": "1.0",
   "action": {
     "default_popup": "index.html",
