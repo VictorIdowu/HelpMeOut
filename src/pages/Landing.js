@@ -1,6 +1,6 @@
 import Features from "../components/Landing/Features";
 import Footer from "../components/Landing/Footer";
-import Works from "../components/Landing/Works";
+import How from "../components/Landing/How";
 import Hero from "../components/Landing/Hero";
 import Navbar from "../components/Landing/Navbar";
 
@@ -10,11 +10,10 @@ const Landing = () => {
       <Navbar />
       <Hero />
       <Features />
-      <Works />
+      <How />
       <Footer />
     </div>
   );
 };
-
 
 export default Landing;

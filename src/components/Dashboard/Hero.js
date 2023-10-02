@@ -1,19 +1,19 @@
+import search from "../../assets/search-normal.svg";
 import logo from "../../assets/logo.png";
 import user from "../../assets/profile-circle.svg";
-import search from "../../assets/search-normal.svg";
 import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
     <div className="mx-[100px] pb-10">
-      <aside className="flex items-center justify-between py-[40px] ">
+      <aside className="flex items-center justify-between py-[40px]">
         <Link to="/">
-        <img className="h-[40px]" src={logo} alt="logo" />
+          <img className="h-[40px]" src={logo} alt="logo" />
         </Link>
         <div className="flex gap-3">
           <img className="w-[40px]" src={user} alt="user" />
           <select name="username">
-            <option value="name">John doe</option>
+            <option value="name">John Mark</option>
           </select>
         </div>
       </aside>
