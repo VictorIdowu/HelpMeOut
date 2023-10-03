@@ -5,6 +5,7 @@ import GetStarted from "./pages/GetStarted";
 import Dashboard from "./pages/Dashboard";
 import VideoViewDashboard from "./pages/VideoViewDashboard";
 import { AuthContextProvider } from "./components/AuthContext";
+import Protected from "./components/Protected";
 
 function App() {
   return (
@@ -13,7 +14,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/getStarted" element={<GetStarted />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <Protected>
+                <Dashboard />
+              </Protected>
+            }
+          />
           <Route path="/video" element={<VideoViewDashboard />} />
         </Routes>
       </AuthContextProvider>

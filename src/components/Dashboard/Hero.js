@@ -21,7 +21,9 @@ const Hero = () => {
       </aside>
       <aside className="flex items-center justify-between pt-5">
         <div>
-          <h2 className="text-3xl font-bold">Hello, John Mark</h2>
+          <h2 className="text-3xl font-bold">
+            Hello {user?.displayName || "User"}
+          </h2>
           <p className="text-gray-600 text-base font-thin">
             Here are your recorded videos
           </p>

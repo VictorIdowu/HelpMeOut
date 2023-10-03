@@ -15,7 +15,7 @@ const Navbar = () => {
         <a href="/">How it works</a>
       </div>
       <div className="flex  text-customBlue gap-4 items-center mb-6 md:mb-0 mt-2 md:mt-0">
-        <Link className="font-bold " to="/getStarted">
+        <Link className="font-bold " to="/dashboard">
           Get Started
         </Link>
         {user != null && <button onClick={() => logOut()}>Sign Out</button>}
