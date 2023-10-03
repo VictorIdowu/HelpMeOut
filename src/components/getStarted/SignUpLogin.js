@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
-import { auth } from "../../Firebase";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+
 import { UserAuth } from "../AuthContext";
 
 const SignUpLogin = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [btnValue, setBtnValue] = useState("");
-  const navigate = useNavigate();
+
   const {
     asAcc,
     toggleSinupLogin,
@@ -37,6 +31,7 @@ const SignUpLogin = (props) => {
     await signupLoginHandler(email, password);
   };
 
+  // Switch between Sign up and Login
   const onSwitch = () => {
     setEmail("");
     setPassword("");
@@ -87,7 +82,7 @@ const SignUpLogin = (props) => {
           onClick={onSwitch}
           className="underline text-[#120b48] font-bold cursor-pointer"
         >
-          {asAcc ? "Log In" : "Signup"}
+          {!asAcc ? "Log In" : "Signup"}
         </span>
       </p>
     </form>
