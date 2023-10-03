@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import facebook from "../assets/g12.png";
-import google from "../assets/Google svg.png";
 import logo from "../assets/logo.png";
-import SignUpLogin from "../components/SignUpLogin";
+import SignUpLogin from "../components/getStarted/SignUpLogin";
+import GoogleAuth from "../components/getStarted/GoogleAuth";
+import { UserAuth } from "../components/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-const SignUp = () => {
-  const [asAcc, setAsAcc] = useState(false);
+const GetStarted = () => {
+  const { user, toggleSinupLogin, asAcc } = UserAuth();
+  const navigate = useNavigate();
 
-  const toggleSinupLogin = () => {
-    setAsAcc((prev) => !prev);
-  };
+  useEffect(() => {
+    if (user != null) {
+      return navigate("/dashboard");
+    }
+  }, [user]);
 
   return (
     <>
@@ -35,18 +40,7 @@ const SignUp = () => {
             </aside>
             <div className="flex flex-col items-center content-center w-full ">
               {/* With Google */}
-              <button
-                className="flex items-center justify-center text-center mt-[32px] text-[16px] tracking-[1%] leading-[24px] w-[475px] h-[48px] border-[1px] rounded-[12px] text-[#141414] border-[#141414]"
-                type="link"
-              >
-                {" "}
-                <img
-                  className=" w-[24px] h-[24px] mr-[16px]"
-                  src={google}
-                  alt="Google Logo"
-                ></img>
-                Continue with Google
-              </button>
+              <GoogleAuth />
               {/* With Facebook */}
               <button
                 className="flex items-center justify-center w-[475px] mt-[24px] text-center text-[16px] tracking-[1%] leading-[24px] h-[48px] rounded-[12px] text-[#141414] border-[#141414] border-[1px]"
@@ -68,7 +62,7 @@ const SignUp = () => {
             </div>
 
             {/* FORM */}
-            <SignUpLogin asAcc={asAcc} switch={toggleSinupLogin} />
+            <SignUpLogin />
           </div>
         </div>
       </section>
@@ -76,4 +70,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default GetStarted;

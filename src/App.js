@@ -1,19 +1,22 @@
-import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Landing from './pages/Landing';
-import SignUp from "./pages/SignUp"
-import Dashboard from './pages/Dashboard';
-import VideoViewDashboard from './pages/VideoViewDashboard';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Landing from "./pages/Landing";
+import GetStarted from "./pages/GetStarted";
+import Dashboard from "./pages/Dashboard";
+import VideoViewDashboard from "./pages/VideoViewDashboard";
+import { AuthContextProvider } from "./components/AuthContext";
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path='/' element={<Landing />} />
-        <Route path='/signup' element={<SignUp />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/video' element={<VideoViewDashboard />} />
-      </Routes>
+      <AuthContextProvider>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/getStarted" element={<GetStarted />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/video" element={<VideoViewDashboard />} />
+        </Routes>
+      </AuthContextProvider>
     </Router>
   );
 }

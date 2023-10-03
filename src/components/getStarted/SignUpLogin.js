@@ -1,76 +1,50 @@
 import { useEffect, useState } from "react";
-import { auth } from "../Firebase";
+import { auth } from "../../Firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { UserAuth } from "../AuthContext";
 
 const SignUpLogin = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
+
   const [btnValue, setBtnValue] = useState("");
   const navigate = useNavigate();
+  const {
+    asAcc,
+    toggleSinupLogin,
+    signupLoginHandler,
+    error,
+    loading,
+    success,
+  } = UserAuth();
 
   useEffect(() => {
-    props.asAcc ? setBtnValue("Login") : setBtnValue("Signup");
+    asAcc ? setBtnValue("Login") : setBtnValue("Signup");
 
-    !props.asAcc
+    !asAcc
       ? setBtnValue((prev) => (loading ? "Signing up..." : prev))
       : setBtnValue((prev) => (loading ? "Login In..." : prev));
-  }, [props, loading]);
+  }, [asAcc, loading]);
 
   // SignUp and Login Handler
-  const signupLoginHandler = async (e) => {
+  const signupOrLoginHandler = async (e) => {
     e.preventDefault();
 
-    if (!email || !password)
-      return setError("Please fill in both email and password fields.");
-
-    setLoading(true);
-    setError(null);
-
-    // Sign Up ()
-    if (!props.asAcc) {
-      try {
-        if (password.length < 7) {
-          setError("Password must be minimum of 7 characters");
-          return setLoading(false);
-        }
-        await createUserWithEmailAndPassword(auth, email, password);
-        return navigate("/dashboard");
-      } catch (error) {
-        setError("Email is already associated with an existing account.");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    // Login ()
-    if (props.asAcc) {
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        return navigate("/dashboard");
-      } catch (error) {
-        setError(`Incorrect email or password entered`);
-      } finally {
-        setLoading(false);
-      }
-    }
+    await signupLoginHandler(email, password);
   };
 
   const onSwitch = () => {
     setEmail("");
     setPassword("");
-    setError("");
-    props.switch();
+    toggleSinupLogin();
   };
 
   return (
-    <form className="w-full mx-auto " onSubmit={signupLoginHandler}>
+    <form className="w-full mx-auto " onSubmit={signupOrLoginHandler}>
       <div className="flex flex-col">
         <label className=" place-self-start mb-[12px]" htmlFor="email">
           Email
@@ -99,7 +73,7 @@ const SignUpLogin = (props) => {
       </div>
       {error && <p className="text-red-500">{error}</p>}
       <button
-        onClick={signupLoginHandler}
+        onClick={signupOrLoginHandler}
         className=" w-[475px] h-[53px] mt-[32px] text-center rounded-[8px] text-[18px] font-medium leading-[21.1px] text-[#f9f9ff] bg-[#120b48] py-[16px] px-[20px]"
         type="submit"
         disabled={loading}
@@ -113,7 +87,7 @@ const SignUpLogin = (props) => {
           onClick={onSwitch}
           className="underline text-[#120b48] font-bold cursor-pointer"
         >
-          {!props.asAcc ? "Log In" : "Signup"}
+          {asAcc ? "Log In" : "Signup"}
         </span>
       </p>
     </form>
